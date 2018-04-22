@@ -17,11 +17,13 @@
   },
   "homepage": "https://github.com/oscarmorrison/nightmare-heroku",
   "dependencies": {
-    "electron": "^1.8.4",
     "nightmare": "^2.10.0"
   },
   "engines": {
     "node": "8.9.4",
     "npm": "5.6.0"
+  },
+  "devDependencies": {
+    "electron": "^1.8.4"
   }
 }
