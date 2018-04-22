@@ -1,1 +1,2 @@
-worker: DEBUG=* xvfb-run --auto-servernum --server-args="-screen 0 1024x768x24" node --harmony index.js
+export DISPLAY=':99.0'
+Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
