@@ -1,1 +1,1 @@
-XAUTHORITY=/tmp/xvfb-run.2NG0xl/Xauthority Xvfb ":99" -screen 0 1280x1024x24 -nolisten tcp
+web: DEBUG=* xvfb-run --server-args="-screen 0 1280x1028x24 -ac +extension GLX +render" node server.js
