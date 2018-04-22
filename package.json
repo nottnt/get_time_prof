@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "electron": "^1.6.10",
+    "electron": "^1.8.4",
     "electron-version": "^1.1.2",
     "nightmare": "^2.10.0"
   },
