@@ -1,1 +1,1 @@
-web: DEBUG=* xvfb-run --server-args="-screen 0 1280x1028x24 -ac +extension GLX +render" node server.js
+web: DEBUG=* xvfb-run --index-args="-screen 0 1280x1028x24 -ac +extension GLX +render" nodemon index.js
