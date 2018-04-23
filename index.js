@@ -1,5 +1,5 @@
 const Nightmare = require('nightmare');
-const nightmare = Nightmare({ electronPath: require('electron') });
+const nightmare = Nightmare({ show:false });
 
 const URL = 'http://blog.oscarmorrison.com/nightmarejs-on-heroku-the-ultimate-scraping-setup/';
 console.log('Welcome to Nightmare scrape\n==========');
