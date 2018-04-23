@@ -2,9 +2,13 @@ const Nightmare = require('nightmare');
 const nightmare = Nightmare({ show:false });
 var express = require('express')
 var app = express()
+var port = process.env.PORT || 5000;
 
+app.listen(port, function() {
+    console.log('Starting node.js on port ' + port)
+  })
 
-app.get('/', function (req, res) {
+app.get('/gettime', function (req, res) {
 nightmare
   .goto('http://klogic.kmutnb.ac.th:8080/kris/tess/dataQuerySelector.jsp?query=teachTab')
   .wait(1000)
