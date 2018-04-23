@@ -1,5 +1,5 @@
 const Nightmare = require('nightmare');
-const nightmare = Nightmare({ show: false });
+const nightmare = Nightmare({  electronPath: require('electron') });
 var express = require('express')
 var app = express()
 
