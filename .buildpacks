@@ -1,8 +1,4 @@
 https://github.com/heroku/heroku-buildpack-apt
 https://github.com/captain401/heroku-buildpack-xvfb.git
-https://github.com/heroku/heroku-buildpack-nodejs.git
 https://github.com/causztic/heroku-electron-buildpack.git
-<<<<<<< HEAD
-=======
-https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git
->>>>>>> d8cd6b79b3b443dd91de9f7ce3ccc4f04ed22bfb
+https://github.com/heroku/heroku-buildpack-nodejs.git
