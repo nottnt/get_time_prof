@@ -3,7 +3,7 @@ const nightmare = Nightmare({ show:false });
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 5000;
-
+var http = require("http");
 
 app.listen(port, function() {
     console.log('Starting node.js on port ' + port)
@@ -11,12 +11,7 @@ app.listen(port, function() {
 
 app.get('/gettime', function gg (req, res) {
  
-if(req != null)
-{
-  nm_js()
-}
-function nm_js(){
-  console.log('fnc work')
+
 nightmare
   .goto('http://klogic.kmutnb.ac.th:8080/kris/tess/dataQuerySelector.jsp?query=teachTab')
   .wait(1000)
@@ -49,8 +44,10 @@ nightmare
     console.error('Search failed:', error)
   })
   
-}
-})
 
+})
+setInterval(function() {
+  http.get("https://get-time-prof.herokuapp.com/gettime");
+}, 300000);
 
 
