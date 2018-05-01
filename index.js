@@ -14,13 +14,13 @@ app.get('/', function(req, res) {
 
 nightmare
   .goto('http://klogic.kmutnb.ac.th:8080/kris/tess/dataQuerySelector.jsp?query=openSectionTab')
-  .wait(500)
+  .wait(1000)
   .select('select[name="facCode"]', '06')
-  .wait(500)
+  .wait(1000)
   .select('select[name="deptCode"]', '0602')
-  .wait(500)
+  .wait(1000)
   .click('table:nth-child(2) > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > input[type="radio"]:nth-child(2)')
-  .wait(1500)
+  .wait(3000)
   .evaluate(function() {
    
     var data = []
