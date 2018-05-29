@@ -1,9 +1,9 @@
 const Nightmare = require('nightmare');
-const nightmare = Nightmare({ show:true });
+const nightmare = Nightmare({ show:false });
 var express = require('express')
 var app = express()
 var port = process.env.PORT || 5000;
-var http = require("http");
+var http = require('http')
 var str
 app.listen(port, function() {
     console.log('Starting node.js on port ' + port)
@@ -14,13 +14,13 @@ app.get('/gettime', function(req, res) {
 
 nightmare
   .goto('http://klogic.kmutnb.ac.th:8080/kris/tess/dataQuerySelector.jsp?query=openSectionTab')
-  .wait(1000)
+  .wait(500)//ขึ้น heroku เปลี่ยนเป็น1000
   .select('select[name="facCode"]', '06')
-  .wait(1000)
+  .wait(500)
   .select('select[name="deptCode"]', '0602')
-  .wait(1000)
+  .wait(500)
   .click('table:nth-child(2) > tbody > tr:nth-child(2) > td:nth-child(1) > table > tbody > tr:nth-child(3) > td:nth-child(2) > input[type="radio"]:nth-child(2)')
-  .wait(3000)
+  .wait(2000)//ชึ้น heroku เปลี่ยนเป็น2000
   .evaluate(function() {
    
     var data = []
@@ -48,15 +48,30 @@ nightmare
           check_h1 = check_h1.substring(0, 2)
 
           if(check_h !='0' && check_h !='1' && check_h !='2' && check_h !='3' && check_h !='4' && check_h !='5' && check_h !='6' && check_h !='7' && check_h !='8' && check_h !='9' && check_space != '&' && check_h != ' ' && check_h != 'M' && check_h != 'T' && check_h != 'W' && check_h != 'H' && check_h != 'F' && check_h != 'S' ){//if1
-          
+            if(expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().length > 6){ //แยก อ.ที่สอนวิชาเดียวกัน
             
+              data.push(
+                {
+                
+             
+                day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerText,
+                time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[1].innerText,
+                prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().substring(11, 14),
+                count : r,
+                c : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
+                
+                
+                }
+              )
+
+            }
                 data.push(
                   {
                   
                
                   day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerText,
                   time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[1].innerText,
-                  prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
+                  prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
                   count : r
                  
                   
@@ -73,7 +88,7 @@ nightmare
                  
                     day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[0].innerText,
                     time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[1].innerText,
-                    prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[2].innerText,
+                    prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
                     count : r
                   
                    
@@ -81,16 +96,35 @@ nightmare
                     
                     }
                   )
+                  if(expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().length > 6){ //แยก อ.ที่สอนวิชาเดียวกัน
+            
+                    data.push(
+                      {
+                      
+                   
+                      day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[0].innerText,
+                      time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[1].innerText,
+                      prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[tr_c].getElementsByTagName('td')[2].innerText.trim().substring(11, 14),
+                      count : r,
+                      c : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
+                      
+                      
+                      }
+                    )
+      
+                  }
                 }//endif2 
+              
           }//endif1
-          else if(check_h1 =='S.' || check_h1 =='L.' ){
+          else if(check_h1 =='S.' || check_h1 =='L.'){
+            
             data.push(
               {
                 
              
                 day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[0].innerText,
                 time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[1].innerText,
-                prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
+                prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
                 count : r
                 
                 
@@ -115,7 +149,6 @@ nightmare
   
 
 })
-setInterval(function() {
-  http.get("https://get-time-prof.herokuapp.com");
-}, 300000);
-
+// setInterval(function() {
+//   http.get("https://get-time-prof.herokuapp.com");
+// }, 300000);
