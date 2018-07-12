@@ -34,8 +34,7 @@ var nightmareProcess = () => {
     var alltr = document.body.getElementsByTagName('table')[5].getElementsByTagName('tr')
     
     var alltr_suc = alltr.length
-    var check_h
-    var check_space
+   
     var check_h1
     var checktr
     
@@ -43,89 +42,54 @@ var nightmareProcess = () => {
     
 
 
-        for(var r = 0; r < alltr_suc ; r++){
-         
-          check_h = alltr[r].getElementsByTagName('td')[0].innerText
-          check_h = check_h.substring(0, 1)
-          check_space = alltr[r].getElementsByTagName('td')[0].innerHTML
-          check_space = check_space.substring(0, 1)
-          
+        for(var r = 0; r < alltr_suc ; r++){//for1
+
           check_h1 = alltr[r].getElementsByTagName('td')[0].innerText
           check_h1 = check_h1.substring(0, 2)
 
-          if(check_h !='0' && check_h !='1' && check_h !='2' && check_h !='3' && check_h !='4' && check_h !='5' && check_h !='6' && check_h !='7' && check_h !='8' && check_h !='9' && check_space != '&' && check_h != ' ' && check_h != 'M' && check_h != 'T' && check_h != 'W' && check_h != 'H' && check_h != 'F' && check_h != 'S' ){//if1
-           
-              
+          if(check_h1 =='L.' || check_h1 =='S.'){//if1
 
             checktr = expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')
-            if(checktr.length>0){//if2
-                 
-              for(var c = 0 ; c < checktr.length ; c++){
-                data.push(
-                  {
+     
+         for(var c = 0 ; c < checktr.length ; c++){//for2
+             data.push(
+              {
                       
                   
-                   day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[0].innerText,
-                   time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[1].innerText,
-                   prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
-                   count : r,
-                   test : 2.1
-                    
+                day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[0].innerText,
+                time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[1].innerText,
+                prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
+                check_tr: checktr.innerText,    
+                test : 2.1,
+              
                       
                       
-                  }
-                )
-                  
-                    if(expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().length > 6){ //แยก อ.ที่สอนวิชาเดียวกัน
-              
-                      data.push(
-                        {
-                        
-                    
-                        day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[0].innerText,
-                        time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[1].innerText,
-                        prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[2].innerText.trim().substring(11, 14),
-                        count : r,
-                        c : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
-                        test : 2.2
-                        
-                        }
-                      )
-        
-                    }
-                  }
-                }//endif2 
-              
-          }//endif1
-          else if(check_h1 =='S.'){
-            
-           
-
-            checktr = expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')
-            if(checktr.length>1){
-            
-              for(var c = 0 ; c < checktr.length ; c++){
-                data.push(
-                  {
-                  
-              
-                  day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[0].innerText,
-                  time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[1].innerText,
-                  prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[2].innerText.trim().substring(3, 6),
-                  count : r,
-                  test : 3.1,
-                  l :checktr.length
-              
-                
-                  
-                  
-                  }
-                )
               }
-             
-            }
-        }
-      }
+            )
+                  
+                if(expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText.trim().length > 6){ //แยก อ.ที่สอนวิชาเดียวกัน
+              
+                  data.push(
+                    {
+                        
+                    
+                    day : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[0].innerText,
+                    time: expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[1].innerText,
+                    prof : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[c].getElementsByTagName('td')[2].innerText.trim().substring(11, 14),
+                    count : r,
+                    c : expr1[r].getElementsByTagName('td')[1].getElementsByTagName('table')[0].getElementsByTagName('tr')[0].getElementsByTagName('td')[2].innerText,
+                    test : 2.2
+                        
+                    }
+                  )
+        
+                }//endif แยกอาจารย์ที่สอนวิชาเดียวกัน
+               }//endfor2
+          
+              
+           }//endif1
+        
+      }//endfor1
       
      
     return data
